@@ -1,0 +1,84 @@
+{
+	"name": "pl_medallion_manual_landing",
+	"properties": {
+		"activities": [
+			{
+				"name": "bronze_task",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sri9unnam@outlook.com/practice/bronze_load"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksLinkedDev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "silver_task",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "bronze_task",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sri9unnam@outlook.com/practice/silver_load"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksLinkedDev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "gold_task",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "silver_task",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/sri9unnam@outlook.com/practice/gold_load"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksLinkedDev",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-05-16T23:48:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

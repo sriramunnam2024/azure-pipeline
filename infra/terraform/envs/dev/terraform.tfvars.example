@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars (gitignored). No secrets — use az login for provider auth.
+
+resource_group_name = "rg-lakehouse-dev"
+location            = "centralindia"   # match your Portal choice
+
+storage_account_name = "stlakehouseYOURINITIALSdev"
+container_name       = "lake"
+landing_prefix       = "landing"
+
+# databricks_workspace_id = ""   # later
+# enable_compute_module   = false

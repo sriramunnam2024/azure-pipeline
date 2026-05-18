@@ -1,0 +1,26 @@
+# Rename to databricks.yml when workspace is ready. No secrets in file.
+# Auth: databricks configure --token (local, gitignored) or OIDC in CI.
+
+bundle:
+  name: azure-lakehouse-dev
+
+workspace:
+  host: https://adb-XXXXXXXX.azuredatabricks.net
+
+variables:
+  storage_account:
+    description: ADLS account name (no keys)
+  container:
+    default: lake
+  landing_prefix:
+    default: landing
+
+# resources:
+#   jobs:
+#     bronze_ingest:
+#       ...
+
+targets:
+  dev:
+    mode: development
+    default: true
